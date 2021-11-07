@@ -1434,7 +1434,7 @@ def createCLI( cross = None ):
     grp.add_argument( '--enable-ffmpeg-aac', dest="enable_ffmpeg_aac", default=not host_tuple.match( '*-*-darwin*' ), action='store_true', help=(( 'enable %s' %h ) if h != argparse.SUPPRESS else h) )
     grp.add_argument( '--disable-ffmpeg-aac', dest="enable_ffmpeg_aac", action='store_false', help=(( 'disable %s' %h ) if h != argparse.SUPPRESS else h) )
 
-    h = IfHost( 'MediaFoundation video encoder', 'aarch64-w64-mingw32', none=argparse.SUPPRESS).value
+    h = IfHost( 'MediaFoundation video encoder', '*-*-mingw*', none=argparse.SUPPRESS).value
     grp.add_argument( '--enable-mf', dest="enable_mf", default=False, action='store_true', help=(( 'enable %s' %h ) if h != argparse.SUPPRESS else h) )
     grp.add_argument( '--disable-mf', dest="enable_mf", action='store_false', help=(( 'disable %s' %h ) if h != argparse.SUPPRESS else h) )
 
@@ -1734,7 +1734,7 @@ try:
                                         none=False).value
                                  and options.enable_x265)
     # Only allow these features on supported platforms
-    options.enable_mf         = IfHost(options.enable_mf, 'aarch64-w64-mingw32',
+    options.enable_mf         = IfHost(options.enable_mf, '*-*-mingw*',
                                        none=False).value
     options.enable_nvenc      = IfHost(options.enable_nvenc, '*-*-linux*',
                                        'x86_64-w64-mingw32', none=False).value
@@ -2173,7 +2173,7 @@ int main()
     stdout.write( 'Enable FFmpeg AAC:  %s' % options.enable_ffmpeg_aac )
     stdout.write( '  (%s)\n' % note_required ) if host_tuple.system != 'darwin' else stdout.write( '\n' )
     stdout.write( 'Enable MediaFound.: %s' % options.enable_mf )
-    stdout.write( ' (%s)\n' % note_unsupported ) if not host_tuple.match( 'aarch64-w64-mingw32' ) else stdout.write( '\n' )
+    stdout.write( ' (%s)\n' % note_unsupported ) if not host_tuple.match( '*-*-mingw*' ) else stdout.write( '\n' )
     stdout.write( 'Enable NVENC:       %s' % options.enable_nvenc )
     stdout.write( ' (%s)\n' % note_unsupported ) if not (host_tuple.system == 'linux' or host_tuple.match( 'x86_64-w64-mingw32' )) else stdout.write( '\n' )
     stdout.write( 'Enable QSV:         %s' % options.enable_qsv )
