@@ -125,12 +125,6 @@ namespace HandBrakeWPF.Converters.Video
                     encoders.Remove(VideoEncoder.NvencH265);
                 }
 
-                if (RuntimeInformation.ProcessArchitecture != Architecture.Arm64)
-                {
-                    encoders.Remove(VideoEncoder.MFH264);
-                    encoders.Remove(VideoEncoder.MFH265);
-                }
-
                 return EnumHelper<VideoEncoder>.GetEnumDisplayValuesSubset(encoders);
             }
 
