@@ -869,10 +869,7 @@ namespace HandBrakeWPF.Services.Presets
 
             if (preset.Task.VideoEncoder == VideoEncoder.MFH264 || preset.Task.VideoEncoder == VideoEncoder.MFH265)
             {
-                if (RuntimeInformation.ProcessArchitecture != Architecture.Arm64)
-                {
-                    return true;
-                }
+                return true;
             }
 
             return false;
